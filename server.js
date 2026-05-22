@@ -35,7 +35,7 @@ app.post("/tts", async (req, res) => {
     );
 
     res.set({
-      "Content-Type": "audio/mpeg"
+      "Content-Type":"audio/mpeg"
     });
 
     res.send(response.data);
