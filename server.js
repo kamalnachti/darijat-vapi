@@ -35,24 +35,25 @@ app.post("/tts", async (req, res) => {
     );
 
     res.set({
-      "Content-Type":"audio/mpeg"
+      "Content-Type": "audio/mpeg"
     });
 
     res.send(response.data);
 
   } catch (error) {
 
-    console.log(error);
+    console.log("ERREUR DARIJAT:");
+    console.log("Status:", error.response?.status);
+    console.log("Data:", error.response?.data?.toString?.() || error.response?.data);
+    console.log("Message:", error.message);
 
-    res.status(500).send("Erreur TTS");
+    res.status(500).json({
+      error: "Erreur TTS",
+      status: error.response?.status,
+      details: error.response?.data?.toString?.() || error.message
+    });
 
   }
-
-});
-
-app.get("/", (req, res) => {
-  res.send("Darijat API OK");
-});
 
 app.listen(3000, () => {
   console.log("Server running on port 3000");
